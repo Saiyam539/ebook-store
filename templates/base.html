@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ebooks Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+
+
+        }
+
+        .nav {
+            display: flex;
+            width: auto;
+            justify-content: space-between;
+            background-color: #cac8c8;
+        }
+
+        .nav-heading {
+            margin-top: 3vh;
+            margin-bottom: 0.5vh;
+            margin-left: 2vh;
+            font-family: fantasy;
+        }
+
+        .nav-commands ul {
+            display: flex;
+            list-style-type: none;
+            justify-content: space-between;
+
+        }
+
+        .nav-commands ul li {
+            margin-top: 2.5vh;
+            margin-bottom: 2vh;
+            margin-right: 4vh;
+
+        }
+
+        .nav-commands ul li a:hover {
+            color: rgb(102, 102, 102);
+        }
+
+        .nav-commands ul li a {
+            text-decoration: none;
+            color: black;
+            font-size: 2vh;
+
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .alert {
+            padding: 10px;
+            background-color: #b9b9b9;
+            /* Red */
+            color: black;
+            margin-bottom: 15px;
+        }
+
+        /* The close button */
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* When moving the mouse over the close button */
+        .closebtn:hover {
+            color: black;
+        }
+        @media (min-width:300px) and (max-width: 425px){
+            .nav{
+                flex-direction: column;
+            }
+            .nav-heading {
+                margin-top: 3vh;
+                margin-bottom: 0.5vh;
+                margin-left: 2vh;
+                text-align: center;
+                font-family: fantasy;
+            }
+        }
+    </style>
+    {% block css %}{% endblock css %}
+
+</head>
+
+<body>
+    <div class="nav">
+        <div class="nav-heading">
+            <a href="/">
+                <h1>BookaHolic</h1>
+            </a>
+        </div>
+        <div class="nav-commands">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/loginuser">login</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+    {%if messages%}
+    {% for message in messages %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% block body %}{% endblock body %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+</body>
+{% block js %}{% endblock js %}
+
+</html>

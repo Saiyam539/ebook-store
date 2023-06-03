@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+    .main-sec {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #673434;
+        height: 40rem;
+    }
+
+    .main-h1 h1 {
+        font-size: 10vh;
+        color: rgb(226, 226, 226);
+        text-shadow: 0 0 20px rgba(255, 1, 1, 0.5);
+    }
+
+    .slogen {
+        font-size: 3vh;
+        display: flex;
+        flex-direction: column;
+    }
+    #mid-book{
+        height: 25rem;
+    }
+    #side-book{
+        height: 23rem;
+    }
+    .img img {
+        height: 26rem;
+        box-shadow: 0 0 4vh rgba(255, 0, 0, 0.5);
+    }
+
+    button {
+        color: #090909;
+        padding: 0.5em 1.2em;
+        font-size: 18px;
+        border-radius: 0.5em;
+        background: #e8e8e8;
+        border: 1px solid #e8e8e8;
+        transition: all .3s;
+        box-shadow: 6px 6px 10px #c5c5c5,
+            -6px -6px 10px #ffffff;
+        width: fit-content;
+        margin-top: 3vh;
+    }
+
+    button:active {
+        color: #666;
+        box-shadow: inset 4px 4px 12px #c5c5c5,
+            inset -4px -4px 12px #ffffff;
+    }
+
+    .info-sec {
+        display: flex;
+        align-items:center;
+        justify-content: space-around;
+
+    }
+    .info-sec-child{
+        background-color: #cbc8c8;
+        margin: 30px;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 4px solid rgba(255, 0, 0, 0.5);
+        box-shadow: 0 0 4vh rgba(255, 0, 0, 0.5);
+    }
+    .info-sec-child img{
+        height: 21rem;
+    }
+    @media (min-width:845px) and (max-width: 1344px){
+        .main-sec{
+            flex-direction: column;
+            height: 70rem;
+        }
+        .slogen{
+            text-align: center;
+        }
+        .main-h1{
+            text-align: center;
+        }
+        .info-sec{
+            flex-direction: column;
+        }
+        .info-sec-child{
+            width: 50rem;
+        }
+    }
+    @media (min-width:746px) and (max-width: 844px){
+        .main-sec{
+            flex-direction: column;
+            height: 60rem;
+        }
+        .slogen{
+            text-align: center;
+        }
+        .main-h1{
+            text-align: center;
+        }
+        .info-sec{
+            flex-direction: column;
+        }
+        .info-sec-child{
+            width: fit-content;
+        }
+    }
+    @media (min-width:600px) and (max-width: 746px){
+        .main-sec{
+            flex-direction: column;
+            height: 60rem;
+        }
+        .slogen{
+            text-align: center;
+            font-size: 2vh;
+        }
+        .main-h1{
+            font-size: 7vh;
+        }
+        .info-sec{
+            flex-direction: column;
+        }
+        .info-sec-child{
+            width: fit-content;
+        }
+        #mid-book{
+            height: 20rem;
+        }
+        #side-book{
+            height: 17rem;
+        }
+
+    }
+    @media (min-width:360px) and (max-width: 599px){
+        .main-sec{
+            flex-direction: column;
+            height: 35rem;
+        }
+        .slogen{
+            text-align: center;
+            font-size: 2vh;
+        }
+        .main-h1{
+            text-align: center;
+        }
+        .main-h1 h1{
+            font-size: 7vh;
+        }
+        .info-sec{
+            flex-direction: column;
+        }
+        .info-sec-child{
+            width: fit-content;
+            margin: 16px;
+            padding: 0.5rem;
+        }
+        #mid-book{
+            height: 14rem;
+        }
+        #side-book{
+            height: 11rem;
+        }
+
+    }
+</style>
+{% endblock css %}
+
+
+
+{% block body %}
+<div class="main-sec">
+    {% load static %}
+    <div class="img">
+        <img id="side-book" class="book-img-3-icon" alt="" src="{% static 'book_img1.png' %}" />
+
+        <img id="mid-book" class="book-img-2-icon" alt="" src="{% static 'book_img2.png' %}" />
+
+        <img id="side-book" class="book-img-1-icon" alt="" src="{% static 'book_img3.png' %}" />
+    </div>
+
+    <div class="heading">
+        <div class="main-h1">
+            <h1>BookaHolic</h1>
+        </div>
+        <div class="slogen">
+            <span style="color: rgb(255, 255, 255); display:block;">Sink and Drown in the fantasy of yours</span>
+            <span style="color: rgb(198, 198, 198);">Explore and Embark on Your Literary Journey with Us!</span>
+            <div class="buttons">
+                <a href="/show_book"><button>Browse Books</button></a>
+                <a style="margin-left: 1rem;" href="/view_wish_list"><button>View Wish List</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="info-sec">
+    <div class="info-sec-child">
+        <img class="section-img-1-1-icon" alt="" src="{% static 'section_img_1.png' %}" />
+        <h1 class="best-ebooks-online">Best Ebooks Online</h1>
+    </div>
+    <div class="info-sec-child">
+        <img class="section-img-1-2-icon" alt="" src="{% static 'section_img_2.png' %}" />
+        <h1 class="latest-ebooks">Latest Ebooks</h1>
+    </div>
+</div>
+<div class="btn"></div>
+</div>
+{% endblock body %}

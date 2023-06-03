@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+    .box {
+        align-items: center;
+        align-items: center;
+        background-color: #cbc8c8;
+        color: black;
+        border: 2px solid rgba(255, 0, 0, 0.5);
+        box-shadow: 0 0 2vh rgba(255, 0, 0, 0.5);
+        border-radius: 20px;
+        margin: 30px;
+        padding: 40px;
+        width: fit-content;
+    }
+    .img {
+        width: 19rem;
+        height: 25rem;
+        object-fit: cover;
+        margin-bottom: 10px;
+        border-radius: 20px;
+
+    }
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        color: white;
+    }
+    .download {
+        background-color: rgb(250, 124, 124);
+        color: black;
+        border-radius: 10em;
+        font-size: 17px;
+        font-weight: 600;
+        padding: 0.3em 0.5em;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        border: 1px solid black;
+        box-shadow: 0 0 0 0 black;
+    }
+    @media (min-width:300px) and (max-width: 425px){
+        .box{
+            margin: 30px;
+            padding: 23px;
+        }
+    }
+</style>
+{% endblock css %}
+{% block body %}
+
+
+{% if is_empty %}
+<h1 style="text-align:center; margin-top:2rem;">Hey!! {{user}}</h1>
+<h1 style="text-align:center; margin-top:2rem;">You have no book in your wish list</h1>
+{% else %}
+<div class="container">
+    {% for item in wishlist %}
+    <div class="box">
+        <img class="img" src="{{item.book.book_cover.url}}" alt="">
+        <div>
+            <h1 style="color: black;">{{item.book.book_name}}</h1>
+            <h6 style="color: black;">Author- {{item.book.book_author}}</h6>
+            <a href="{% url 'delete_item' item.id %}"><button class="download">Delete</button>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock body %}

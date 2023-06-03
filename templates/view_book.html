@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% block css %}
+<style>
+    .container {
+        display: flex;
+        margin-top: 4rem;
+    }
+
+    .image img {
+        width: 25rem;
+        height: 32rem;
+        border: 3px solid black;
+    }
+
+    .info {
+        margin-left: 3rem;
+    }
+
+    .button {
+        background-color: white;
+        color: black;
+        border-radius: 10em;
+        font-size: 17px;
+        font-weight: 600;
+        padding: 1em 2em;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        border: 1px solid black;
+        box-shadow: 0 0 0 0 black;
+        margin-right: 1rem;
+    }
+
+    .button:hover {
+        transform: translateY(-4px) translateX(-2px);
+        box-shadow: 2px 5px 0 0 black;
+    }
+
+    .button:active {
+        transform: translateY(2px) translateX(1px);
+        box-shadow: 0 0 0 0 black;
+    }
+
+    .download {
+        background-color: rgb(250, 124, 124);
+        color: black;
+        border-radius: 10em;
+        font-size: 17px;
+        font-weight: 600;
+        padding: 1em 2em;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        border: 1px solid black;
+        box-shadow: 0 0 0 0 black;
+    }
+    .buttons{
+        display: flex;
+        width: fit-content;
+        justify-content: space-between;
+    }
+    .read-more-btn {
+        color: rgb(15, 127, 255);
+        cursor: pointer;
+      }
+    .hidden {
+        display: none;
+      }
+    @media (min-width:421px) and (max-width: 990px){
+        .container{
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .buttons{
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            width: auto;
+        }
+        .info{
+            margin-left: 0px;
+
+        }
+        .read-more-btn {
+            color: rgb(15, 127, 255);
+            cursor: pointer;
+          }
+        .hidden {
+            display: none;
+          }
+    }
+    @media (min-width:300px) and (max-width: 420px){
+        .container{
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .buttons{
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            width: auto;
+        }
+        .info{
+            margin-left: 0px;
+
+        }
+        .read-more-btn {
+            color: rgb(15, 127, 255);
+            cursor: pointer;
+          }
+        .hidden {
+            display: none;
+        }
+        .image img {
+            width: 19rem;
+            height: 25rem;
+            border: 3px solid black;
+        }
+        .button {
+            font-size: 16px;
+            padding: 0.7em 1em;
+            margin-right: 1rem;
+        }
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+<div class="container">
+    <div class="image">
+        <img src="{{book.book_cover.url}}" alt="">
+    </div>
+    <div class="info">
+        <h1>{{book.book_name}}</h1>
+        <h4>by {{book.book_author}}</h4>
+        <p id="my-paragraph">{{book.book_desc}} Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum maxime ad corporis
+            explicabo vero iusto eum, veniam inventore fugiat, reiciendis pariatur hic natus veritatis dolore at.
+            Aspernatur molestias obcaecati, pariatur possimus eaque ullam dicta earum nostrum! Quod dignissimos, aliquam
+            nostrum doloremque animi temporibus voluptas cupiditate nesciunt rerum recusandae labore sit unde nemo
+            consequuntur, quaerat amet molestias? Vero nam ipsam qui, beatae id, ipsa, fugit natus accusantium maxime
+            quasi numquam. Laudantium nihil dicta a accusamus esse voluptatum porro vitae, necessitatibus excepturi
+            deleniti similique officiis quae ipsa, facilis non quidem, molestias nam mollitia repellendus. Odit, veniam
+            deserunt magnam rem sunt et dolore temporibus, excepturi quisquam alias cum ducimus numquam, dolorum
+            asperiores eos maiores ab assumenda placeat! Maiores a neque enim quia laborum earum tenetur, ducimus fuga
+            dignissimos iure ex aperiam repellendus, quam illum quas at, non aut. Iusto, ratione quod at, fuga modi
+            saepe dicta velit amet obcaecati eligendi aperiam! Voluptatem, optio iure! Iure tempora sapiente unde. Rem
+            sint adipisci officia voluptatem. Ratione repellendus amet nihil sapiente doloremque harum dignissimos sint
+            impedit voluptatibus neque soluta aut, ea quidem id! Amet autem veniam deserunt ipsam sint minima, neque ad
+            at architecto, soluta repellat. In obcaecati nostrum eligendi architecto dolore perferendis non, dolores
+            fugit.</p>
+        <div class="buttons">
+            <a href="{% url 'add_wish' book.id %}"><button class="button">Wish List</button></a>
+            <a href="{% url 'download_pdf' book.id %}"><button class="button download">Download Book</button></a>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+{% block js %}
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+      var paragraph = document.getElementById('my-paragraph');
+      var content = paragraph.innerHTML;
+      var words = content.split(' ');
+      var truncated = words.slice(0, 100).join(' ');
+      var remaining = words.slice(100).join(' ');
+      var readMoreBtn = document.createElement('span');
+      var isTruncated = true;
+
+      readMoreBtn.className = 'read-more-btn';
+      readMoreBtn.innerText = 'Read More';
+      readMoreBtn.addEventListener('click', function() {
+        if (isTruncated) {
+          paragraph.innerHTML = content;
+          readMoreBtn.innerText = 'Read Less';
+        } else {
+          paragraph.innerHTML = truncated;
+          readMoreBtn.innerText = 'Read More';
+        }
+        isTruncated = !isTruncated;
+      });
+
+      paragraph.innerHTML = truncated;
+      paragraph.insertAdjacentElement('afterend', readMoreBtn);
+    });
+  </script>
+{% endblock js %}
